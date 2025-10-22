@@ -151,8 +151,18 @@ export default function Home() {
   }
 
   const handleLogout = async () => {
-    await authClient.signOut()
-    router.push('/login')
+    try {
+      await authClient.signOut({
+        fetchOptions: {
+          onSuccess: () => {
+            router.push('/login')
+          }
+        }
+      })
+    } catch (error) {
+      console.error('Logout error:', error)
+      router.push('/login')
+    }
   }
 
   if (isPending) {
