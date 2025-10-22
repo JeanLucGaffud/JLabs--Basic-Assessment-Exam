@@ -5,8 +5,17 @@ export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams
     const ip = searchParams.get('ip')
     
-    const url = ip 
-      ? `https://ipinfo.io/${ip}/geo` 
+
+    let targetIp: string | null = ip
+    if (!targetIp) {
+      const forwardedFor = request.headers.get('x-forwarded-for')
+      targetIp = forwardedFor?.split(',')[0] || 
+                 request.headers.get('x-real-ip') || 
+                 null
+    }
+    
+    const url = targetIp 
+      ? `https://ipinfo.io/${targetIp}/geo` 
       : 'https://ipinfo.io/geo'
     
     const response = await fetch(url, {
