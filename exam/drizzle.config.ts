@@ -1,10 +1,12 @@
-import { defineConfig } from "drizzle-kit";
 import 'dotenv/config'
 
-export default defineConfig({
-  dialect: 'postgresql', // 'mysql' | 'sqlite' | 'turso'
+const config = {
   schema: './src/db/schema/auth-schema.ts',
+  out: './drizzle',
+  driver: 'pg',
   dbCredentials: {
-    url: process.env.DATABASE_URL!
+    connectionString: process.env.DATABASE_URL!
   }
-})
+}
+
+export default config
