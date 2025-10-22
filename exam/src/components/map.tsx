@@ -1,4 +1,4 @@
-'use client'
+
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
 import { useEffect, useMemo } from 'react'
 import L from 'leaflet'
@@ -18,6 +18,7 @@ function RecenterMap({ lat, lng }: { lat: number; lng: number }) {
   
   return null
 }
+export const dynamic = 'force-dynamic';
 
 export default function MapPage({ lat, lng }: MapProps) {
 

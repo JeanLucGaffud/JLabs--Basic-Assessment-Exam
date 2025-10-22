@@ -51,6 +51,7 @@ export default function Home() {
     if (session && !geoData) {
       fetchGeoLocation()
     }
+
   }, [session, isPending])
 
   useEffect(() => {
